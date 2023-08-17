@@ -15,7 +15,13 @@ class ProjectIndex extends Component
     public function render()
     {
         return view('livewire.project-index', [
-            'projects' => Project::with('user')->paginate(10)
+            'projects' => Project::with('user')->orderBy('created_at', 'desc')->paginate(10)
         ]);
+    }
+
+    public function destroy($projectId) {
+        $project = Project::findOrFail($projectId);
+        $project->delete();
+        session()->flash('message', 'Project deleted successfully.');
     }
 }

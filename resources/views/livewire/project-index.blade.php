@@ -2,8 +2,14 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
+                @if(session()->has('message'))
+                    <div class="alert alert-success">{{ session('message') }}</div>
+                @endif
                 <div class="card">
-                    <div class="card-header">{{ __('All Project') }}</div>
+                    <div class="card-header d-flex flex-row justify-content-between align-items-center">
+                        <div>{{ __('All Project') }}</div>
+                        <div><a class="btn btn-primary" href="{{route('project.create')}}">{{ __('Add Project') }}</a></div>
+                    </div>
                     <div class="card-body">
                         <table class="table table-bordered table-striped">
                             <thead class="table-dark">
@@ -28,7 +34,11 @@
                                     <td>{{$project->end_date}}</td>
                                     <td>{{activityStatus($project->status)}}</td>
                                     <td><a href="">{{$project->user->name}}</a></td>
-                                    <th><a href="{{route('project.show', $project->id)}}">View</a> | <a href="">Edit</a> | <a href="">Delete</a></th>
+                                    <th>
+                                        @include('partials.view', ['route' => 'project.show','id' => $project->id])  
+                                        @include('partials.edit', ['route' => 'project.edit','id' => $project->id]) 
+                                        @include('partials.destroy', ['id' => $project->id]) 
+                                    </th>
                                 </tr>
                                 @endforeach
                             </tbody>

@@ -2,10 +2,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                @if(session()->has('message'))
-                    <div class="alert alert-success">{{ session('message') }}</div>
-                @endif
-                <form wire:submit.prevent="updateProject">
+                <form wire:submit.prevent="createProject" autocomplete="off">
                     <div class="card">
                         <div class="card-header">
                             <div class="mb-3">
@@ -54,7 +51,7 @@
                                     @error('assigned_user') <span class="error text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary">Update</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
                     </div>
                 </form>

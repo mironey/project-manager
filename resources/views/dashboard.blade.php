@@ -2,18 +2,25 @@
 
 @section('content')
 
-@if($wire == 'index')
+@switch($wire)
+    @case('index')
+        <livewire:project-index /> 
+        @break
 
-<livewire:project-index /> 
+    @case('show')
+        <livewire:project-show :projectId='$id' /> 
+        @break
 
-@elseif($wire == 'show')
+    @case('edit')
+        <livewire:project-edit :projectId='$id' /> 
+        @break
+    
+    @case('create')
+        <livewire:project-create /> 
+        @break
 
-<livewire:project-show :projectId='$id' /> 
-
-@elseif($wire == 'edit')
-
-<livewire:project-edit :projectId='$id' /> 
-
-@endif
+    @default
+        <livewire:project-index /> 
+@endswitch
 
 @endsection

@@ -25,4 +25,10 @@ class ProjectController extends Controller
             'wire' => 'edit'
         ]);
     }
+
+    public function create() {
+        return view('dashboard', [
+            'wire' => 'create'
+        ]);
+    }
 }

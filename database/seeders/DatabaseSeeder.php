@@ -41,13 +41,13 @@ class DatabaseSeeder extends Seeder
         $role2->givePermissionTo('delete projects');
         $role2->givePermissionTo('publish projects');
 
-        $role2 = Role::create(['name' => 'admin']);
-        $role2->givePermissionTo('edit projects');
-        $role2->givePermissionTo('delete projects');
-        $role2->givePermissionTo('publish projects');
-        $role2->givePermissionTo('unpublish projects');
+        $role3 = Role::create(['name' => 'admin']);
+        $role3->givePermissionTo('edit projects');
+        $role3->givePermissionTo('delete projects');
+        $role3->givePermissionTo('publish projects');
+        $role3->givePermissionTo('unpublish projects');
 
-        $role3 = Role::create(['name' => 'Super-Admin']);
+        $role4 = Role::create(['name' => 'Super-Admin']);
 
         $user = User::factory()->create([
             'name' => 'Member User',
@@ -57,20 +57,44 @@ class DatabaseSeeder extends Seeder
         $user->assignRole($role1);
 
         $user = User::factory()->create([
+            'name' => 'Manager One',
+            'email' => 'manager@project.com',
+            'password' => bcrypt('12345678')
+        ]);
+        $user->assignRole($role2);
+
+        $user = User::factory()->create([
+            'name' => 'Manager Two',
+            'email' => 'manager2@project.com',
+            'password' => bcrypt('12345678')
+        ]);
+        $user->assignRole($role2);
+
+        $user = User::factory()->create([
+            'name' => 'Manager Three',
+            'email' => 'manager3@project.com',
+            'password' => bcrypt('12345678')
+        ]);
+        $user->assignRole($role2);
+
+        $user = User::factory()->create([
             'name' => 'Admin User',
             'email' => 'admin@project.com',
             'password' => bcrypt('12345678')
         ]);
-        $user->assignRole($role2);
+        $user->assignRole($role3);
 
         $user = User::factory()->create([
             'name' => 'Super Admin User',
             'email' => 'superadmin@project.com',
             'password' => bcrypt('12345678')
         ]);
-        $user->assignRole($role3);
+        $user->assignRole($role4);
 
-        User::factory(5)->create();
+        User::factory(5)->afterCreating(function (User $user) use ($role1) {
+            $user->assignRole($role1);
+        })->create();
+
         Project::factory(5)->create();
         Task::factory(15)->create();
         Comment::factory(30)->create();
