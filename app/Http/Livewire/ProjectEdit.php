@@ -8,6 +8,7 @@ use Livewire\Component;
 
 class ProjectEdit extends Component
 {
+    public $projectId;
     public $project;
     public $users;
     public $name;
@@ -26,9 +27,9 @@ class ProjectEdit extends Component
         'assigned_user' => 'required|integer',
     ];
 
-    public function mount($projectId)
+    public function mount()
     {
-        $this->project = Project::with('user')->where('id', $projectId)->first();
+        $this->project = Project::with('user')->where('id', $this->projectId)->first();
         $this->users = User::role('manager')->get();
 
         $this->name = $this->project->name;
@@ -55,5 +56,6 @@ class ProjectEdit extends Component
         $this->project->user_id = $this->assigned_user;
         $this->project->save();
         session()->flash('message', 'Project updated successfully.');
+        return redirect()->route('project.show', $this->projectId);
     }
 }

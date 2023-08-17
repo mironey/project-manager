@@ -19,6 +19,18 @@
         <livewire:project-create /> 
         @break
 
+    @case('task-create')
+        <livewire:task-create :projectId='$id' /> 
+        @break
+
+    @case('task-show')
+        <livewire:task-show :projectId='$projectId' :taskId='$taskId' /> 
+        @break
+
+    @case('task-edit')
+        <livewire:task-edit :projectId='$projectId' :taskId='$taskId' /> 
+        @break
+
     @default
         <livewire:project-index /> 
 @endswitch

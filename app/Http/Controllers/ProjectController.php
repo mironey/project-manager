@@ -19,16 +19,16 @@ class ProjectController extends Controller
         ]);
     }
 
+    public function create() {
+        return view('dashboard', [
+            'wire' => 'create'
+        ]);
+    }
+
     public function edit($id) {
         return view('dashboard', [
             'id' => $id,
             'wire' => 'edit'
-        ]);
-    }
-
-    public function create() {
-        return view('dashboard', [
-            'wire' => 'create'
         ]);
     }
 }

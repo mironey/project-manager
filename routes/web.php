@@ -26,7 +26,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::middleware('auth')->group(function() {
     Route::get('/dashboard', [ProjectController::class, 'index'])->name('project.index');
+    
     Route::get('/project/create', [ProjectController::class, 'create'])->name('project.create');
     Route::get('/project/{id}', [ProjectController::class, 'show'])->name('project.show');
     Route::get('/project/edit/{id}', [ProjectController::class, 'edit'])->name('project.edit');
+
+    Route::get('/{id}/task/create', [TaskController::class, 'create'])->name('task.create');
+    Route::get('/{projectId}/task/{taskId}', [TaskController::class, 'show'])->name('task.show');
+    Route::get('/{projectId}/task/edit/{taskId}', [TaskController::class, 'edit'])->name('task.edit');
 });
