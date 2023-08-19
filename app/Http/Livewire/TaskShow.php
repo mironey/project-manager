@@ -11,10 +11,7 @@ class TaskShow extends Component
 
     public function mount($projectId, $taskId)
     {
-        $this->task = Task::with('user')
-        ->where('project_id', $projectId)
-        ->where('id', $taskId)
-        ->first();
+        $this->task = Task::with('user')->where('project_id', $projectId)->where('id', $taskId)->first();
     }
 
     public function render()

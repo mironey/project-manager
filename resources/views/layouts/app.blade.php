@@ -33,8 +33,8 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="nav-link link-light">
-                            Dashboard
+                            <a href="{{route('project.index')}}" class="nav-link link-light">
+                            Project
                             </a>
                         </li>
                         <li>

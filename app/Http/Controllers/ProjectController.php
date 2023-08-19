@@ -8,27 +8,27 @@ class ProjectController extends Controller
 {
     public function index() {
        return view('dashboard', [
-        'wire' => 'index'
+        'wire' => 'project-index'
        ]);
     }
 
     public function show($id) {
         return view('dashboard', [
             'id' => $id,
-            'wire' => 'show'
+            'wire' => 'project-show'
         ]);
     }
 
     public function create() {
         return view('dashboard', [
-            'wire' => 'create'
+            'wire' => 'project-create'
         ]);
     }
 
     public function edit($id) {
         return view('dashboard', [
             'id' => $id,
-            'wire' => 'edit'
+            'wire' => 'project-edit'
         ]);
     }
 }

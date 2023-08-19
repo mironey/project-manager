@@ -26,7 +26,7 @@ class ProjectFactory extends Factory
             'start_date' => $start_date,
             'end_date' => $end_date,
             'status' => rand(1, 3),
-            'user_id' => User::all()->random()->id
+            'user_id' => User::role('manager')->pluck('id')->random()
         ];
     }
 }

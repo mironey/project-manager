@@ -25,4 +25,10 @@ class Project extends Model
     public function tasks() {
         return $this->hasMany(Task::class);
     }
+
+    public function taskWithMember() {
+        return $this->hasMany(Task::class)->with(['user' => function ($query) {
+            $query->select('name');
+        }]);
+    }
 }

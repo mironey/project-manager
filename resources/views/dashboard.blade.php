@@ -2,37 +2,98 @@
 
 @section('content')
 
-@switch($wire)
-    @case('index')
-        <livewire:project-index /> 
-        @break
+@if(Auth::user()->hasRole('admin'))
 
-    @case('show')
-        <livewire:project-show :projectId='$id' /> 
-        @break
+    @switch($wire)
 
-    @case('edit')
-        <livewire:project-edit :projectId='$id' /> 
-        @break
-    
-    @case('create')
-        <livewire:project-create /> 
-        @break
+        @case('dashboard-index')
+            <livewire:admin.admin-dashboard /> 
+            @break
 
-    @case('task-create')
-        <livewire:task-create :projectId='$id' /> 
-        @break
+        @case('project-index')
+            <livewire:project-index /> 
+            @break
 
-    @case('task-show')
-        <livewire:task-show :projectId='$projectId' :taskId='$taskId' /> 
-        @break
+        @case('project-show')
+            <livewire:project-show :projectId='$id' /> 
+            @break
+        
+        @case('project-create')
+            <livewire:project-create /> 
+            @break
 
-    @case('task-edit')
-        <livewire:task-edit :projectId='$projectId' :taskId='$taskId' /> 
-        @break
+        @case('project-edit')
+            <livewire:project-edit :projectId='$id' /> 
+            @break
 
-    @default
-        <livewire:project-index /> 
-@endswitch
+        @case('task-index')
+            <livewire:task-index /> 
+            @break
+
+        @case('task-show')
+            <livewire:task-show :projectId='$projectId' :taskId='$taskId' /> 
+            @break
+
+        @case('task-create')
+            <livewire:task-create :projectId='$id' /> 
+            @break
+
+        @case('task-edit')
+            <livewire:task-edit :projectId='$projectId' :taskId='$taskId' /> 
+            @break
+
+        @default
+            <livewire:admin.admin-dashboard /> 
+    @endswitch
+
+@elseif(Auth::user()->hasRole('manager'))
+
+    @switch($wire)
+
+        @case('dashboard-index')
+            <livewire:manager.manager-dashboard /> 
+            @break
+
+        @case('project-show')
+            <livewire:manager.project-show :projectId='$id' /> 
+            @break
+
+        @case('task-index')
+            <livewire:task-index /> 
+            @break
+
+        @case('task-show')
+            <livewire:task-show :projectId='$projectId' :taskId='$taskId' /> 
+            @break
+
+        @case('task-create')
+            <livewire:task-create :projectId='$id' /> 
+            @break
+
+        @case('task-edit')
+            <livewire:task-edit :projectId='$projectId' :taskId='$taskId' /> 
+            @break
+
+        @default
+            <livewire:manager.manager-dashboard /> 
+    @endswitch
+
+@elseif(Auth::user()->hasRole('member'))
+
+    @switch($wire)
+
+        @case('dashboard-index')
+            <livewire:member.member-dashboard /> 
+            @break
+
+        @case('task-show')
+            <livewire:task-show :projectId='$projectId' :taskId='$taskId' /> 
+            @break
+
+        @default
+            <livewire:member.member-dashboard /> 
+    @endswitch
+
+@endif
 
 @endsection

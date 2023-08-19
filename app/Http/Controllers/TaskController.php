@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 class TaskController extends Controller
 {
     public function index() {
-       // return view('dashboard');
+        return view('dashboard', [
+            'wire' => 'task-index'
+        ]);
      }
 
      public function show($projectId, $taskId) {

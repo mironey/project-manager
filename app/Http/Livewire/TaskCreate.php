@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Task;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class TaskCreate extends Component
@@ -48,6 +49,11 @@ class TaskCreate extends Component
         ]);
         $this->reset(['name', 'description', 'due_date', 'status', 'assigned_user']);
         session()->flash('message', 'Task created successfully.');
-        return redirect()->route('project.show', $this->projectId);
+
+        if(Auth::user()->hasRole('admin')) {
+            return redirect()->route('project.show', $this->projectId);
+        } elseif (Auth::user()->hasRole('manager')) {
+            return redirect()->route('manager.dashboard');
+        }
     }
 }
