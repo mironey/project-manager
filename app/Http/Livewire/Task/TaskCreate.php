@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Task;
 
 use App\Models\Task;
 use App\Models\User;
@@ -32,7 +32,7 @@ class TaskCreate extends Component
 
     public function render()
     {
-        return view('livewire.task-create');
+        return view('livewire.task.task-create');
     }
 
     public function createTask()
@@ -51,7 +51,7 @@ class TaskCreate extends Component
         session()->flash('message', 'Task created successfully.');
 
         if(Auth::user()->hasRole('admin')) {
-            return redirect()->route('project.show', $this->projectId);
+            return redirect()->route('admin.project.show', $this->projectId);
         } elseif (Auth::user()->hasRole('manager')) {
             return redirect()->route('manager.dashboard');
         }

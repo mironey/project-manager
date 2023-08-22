@@ -28,9 +28,21 @@
                     <hr/>
                     <ul class="nav nav-pills flex-column mb-auto mt-2">
                         <li class="nav-item">
-                            <a href="{{route('project.index')}}" class="nav-link active" aria-current="page">
-                            Home
+                        @hasanyrole('super-admin|admin')
+                            <a href="{{route('admin.dashboard')}}" class="nav-link active" aria-current="page">
+                            Dashboard
                             </a>
+                        @endhasanyrole
+                        @hasrole('manager')
+                            <a href="{{route('manager.dashboard')}}" class="nav-link active" aria-current="page">
+                            Dashboard
+                            </a>
+                        @endhasrole
+                        @hasrole('supervisor')
+                            <a href="{{route('supervisor.dashboard')}}" class="nav-link active" aria-current="page">
+                            Dashboard
+                            </a>
+                        @endhasrole
                         </li>
                         <li>
                             <a href="{{route('project.index')}}" class="nav-link link-light">

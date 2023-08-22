@@ -10,9 +10,9 @@ class TaskController extends Controller
         return view('dashboard', [
             'wire' => 'task-index'
         ]);
-     }
+    }
 
-     public function show($projectId, $taskId) {
+    public function show($projectId, $taskId) {
         return view('dashboard', [
             'projectId' => $projectId,
             'taskId' => $taskId,

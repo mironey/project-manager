@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Task;
 
 use App\Models\Task;
 use Livewire\Component;
@@ -8,14 +8,16 @@ use Livewire\Component;
 class TaskShow extends Component
 {
     public $task;
+    public $assignments;
 
     public function mount($projectId, $taskId)
     {
         $this->task = Task::with('user')->where('project_id', $projectId)->where('id', $taskId)->first();
+        $this->assignments = $this->task->assignmentsByStatus();
     }
 
     public function render()
     {
-        return view('livewire.task-show');
+        return view('livewire.task.task-show');
     }
 }

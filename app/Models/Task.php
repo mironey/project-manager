@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Task extends Model
 {
@@ -25,6 +26,16 @@ class Task extends Model
 
     public function project() {
         return $this->belongsTo(Project::class);
+    }
+
+    public function assignment() {
+        return $this->hasMany(Assignment::class);
+    }
+
+    public function assignmentsByStatus()
+    {
+        return $this->assignment()
+            ->select('status', DB::raw('count(*) as count'), DB::raw('MAX(name) as name'), DB::raw('MAX(id) as id'))->groupBy('status')->get();
     }
 
     public function comment() {

@@ -11,19 +11,19 @@
             @break
 
         @case('project-index')
-            <livewire:project-index /> 
+            <livewire:project.project-index /> 
             @break
 
         @case('project-show')
-            <livewire:project-show :projectId='$id' /> 
+            <livewire:project.project-show :projectId='$id' /> 
             @break
         
         @case('project-create')
-            <livewire:project-create /> 
+            <livewire:project.project-create /> 
             @break
 
         @case('project-edit')
-            <livewire:project-edit :projectId='$id' /> 
+            <livewire:project.project-edit :projectId='$id' /> 
             @break
 
         @case('task-index')
@@ -31,15 +31,19 @@
             @break
 
         @case('task-show')
-            <livewire:task-show :projectId='$projectId' :taskId='$taskId' /> 
+            <livewire:task.task-show :projectId='$projectId' :taskId='$taskId' /> 
             @break
 
         @case('task-create')
-            <livewire:task-create :projectId='$id' /> 
+            <livewire:task.task-create :projectId='$id' /> 
             @break
 
         @case('task-edit')
-            <livewire:task-edit :projectId='$projectId' :taskId='$taskId' /> 
+            <livewire:task.task-edit :projectId='$projectId' :taskId='$taskId' /> 
+            @break
+
+        @case('assignment-create')
+            <livewire:assignment.assignment-create :projectId='$projectId' :taskId='$taskId' /> 
             @break
 
         @default
@@ -55,27 +59,59 @@
             @break
 
         @case('project-show')
-            <livewire:manager.project-show :projectId='$id' /> 
+            <livewire:project.project-show :projectId='$id' /> 
             @break
 
         @case('task-index')
-            <livewire:task-index /> 
+            <livewire:task.task-index /> 
             @break
 
         @case('task-show')
-            <livewire:task-show :projectId='$projectId' :taskId='$taskId' /> 
+            <livewire:task.task-show :projectId='$projectId' :taskId='$taskId' /> 
             @break
 
         @case('task-create')
-            <livewire:task-create :projectId='$id' /> 
+            <livewire:task.task-create :projectId='$id' /> 
             @break
 
         @case('task-edit')
-            <livewire:task-edit :projectId='$projectId' :taskId='$taskId' /> 
+            <livewire:task.task-edit :projectId='$projectId' :taskId='$taskId' /> 
+            @break
+
+        @case('assignment-create')
+            <livewire:assignment.assignment-create :projectId='$projectId' :taskId='$taskId' /> 
             @break
 
         @default
             <livewire:manager.manager-dashboard /> 
+    @endswitch
+
+@elseif(Auth::user()->hasRole('supervisor'))
+
+    @switch($wire)
+
+        @case('dashboard-index')
+            <livewire:supervisor.supervisor-dashboard /> 
+            @break
+
+        @case('task-show')
+            <livewire:task.task-show :projectId='$projectId' :taskId='$taskId' /> 
+            @break
+
+        @case('assignment-show')
+            <livewire:assignment.assignment-show :projectId='$projectId' :taskId='$taskId' :assignmentId='$assignmentId' /> 
+            @break
+
+        @case('assignment-create')
+            <livewire:assignment.assignment-create :projectId='$projectId' :taskId='$taskId' /> 
+            @break
+
+        @case('assignment-edit')
+            <livewire:assignment.assignment-edit :projectId='$projectId' :taskId='$taskId' :assignmentId='$assignmentId' /> 
+            @break
+
+        @default
+            <livewire:member.member-dashboard /> 
     @endswitch
 
 @elseif(Auth::user()->hasRole('member'))
@@ -86,12 +122,12 @@
             <livewire:member.member-dashboard /> 
             @break
 
-        @case('task-show')
-            <livewire:task-show :projectId='$projectId' :taskId='$taskId' /> 
+        @case('assignment-show')
+            <livewire:assignment.assignment-show :projectId='$projectId' :taskId='$taskId' :assignmentId='$assignmentId' /> 
             @break
 
         @default
-            <livewire:member.member-dashboard /> 
+        <livewire:member.member-dashboard /> 
     @endswitch
 
 @endif

@@ -27,7 +27,11 @@
                                     <td>{{$project->end_date}}</td>
                                     <td>{{activityStatus($project->status)}}</td>
                                     <td><a href="">{{$project->user->name}}</a></td>
-                                    <th><a href="{{route('project.edit', $project->id)}}">Edit</a> | <a href="">Delete</a></th>
+                                    @hasanyrole('super-admin|admin')
+                                    <th><a href="{{route('admin.project.edit', $project->id)}}">Edit</a> | <a href="">Delete</a></th>
+                                    @else
+                                    <th><a href="">Start Now</a></th>
+                                    @endhasanyrole
                                 </tr>
                             </tbody>
                         </table>
@@ -41,7 +45,12 @@
                             <p>This package allows for users to be associated with permissions and roles.</p>
                         </div>
                         <div>
-                            <a class="btn btn-primary" href="{{route('task.create', $project->id)}}">{{ __('Add Task') }}</a>
+                            @hasanyrole('super-admin|admin')
+                            <a class="btn btn-primary" href="{{route('admin.task.create', $project->id)}}">{{ __('Add Task') }}</a>
+                            @endhasanyrole
+                            @hasrole('manager')
+                            <a class="btn btn-primary" href="{{route('manager.task.create', $project->id)}}">{{ __('Add Task') }}</a>
+                            @endhasrole
                         </div>
                     </div>
                     <div class="card-body">
@@ -57,10 +66,19 @@
                                         <p><strong>Assigned to:</strong> {{$task->user->name}}</p>
                                     </div>
                                     <div class="d-inline-flex">
-                                        <a href="{{route('task.show', ['projectId' => $task->project_id, 'taskId' => $task->id])}}" 
+                                    @hasanyrole('super-admin|admin')
+                                        <a href="{{route('admin.task.show', ['projectId' => $task->project_id, 'taskId' => $task->id])}}" 
                                         class="mx-2">View</a>
-                                        <a href="{{route('task.edit', ['projectId' => $task->project_id, 'taskId' => $task->id])}}" class="mx-2">Edit</a>
+                                        <a href="{{route('admin.task.edit', ['projectId' => $task->project_id, 'taskId' => $task->id])}}" class="mx-2">Edit</a>
                                         <a href="" class="mx-2">Delete</a>
+                                    @endhasanyrole
+                                    @hasrole('manager')
+                                        <a href="{{route('manager.task.show', ['projectId' => $task->project_id, 'taskId' => $task->id])}}" 
+                                        class="mx-2">View</a>
+                                        <a href="{{route('manager.task.edit', ['projectId' => $task->project_id, 'taskId' => $task->id])}}" class="mx-2">Edit</a>
+                                        <a href="" class="mx-2">Delete</a>
+                                    @endhasrole
+                                        
                                     </div>
                                 </div>
                                 <span class="badge bg-primary rounded-pill">In Progress</span>

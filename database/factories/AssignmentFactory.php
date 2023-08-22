@@ -2,15 +2,15 @@
 
 namespace Database\Factories;
 
-use App\Models\Project;
+use App\Models\Task;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Task>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Assignment>
  */
-class TaskFactory extends Factory
+class AssignmentFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -20,13 +20,13 @@ class TaskFactory extends Factory
     public function definition(): array
     {
         return [
-            'project_id' => Project::all()->random()->id,
+            'task_id' => Task::all()->random()->id,
             'name' => fake()->unique()->sentence(3),
             'description' => fake()->text(),
-            'due_date' => Carbon::now()->addDays(3),
+            'due_date' => Carbon::now()->addDays(1),
             'priority' => rand(1, 3),
             'status' => rand(1, 3),
-            'user_id' => User::role('supervisor')->pluck('id')->random()
+            'user_id' => User::role('member')->pluck('id')->random()
         ];
     }
 }

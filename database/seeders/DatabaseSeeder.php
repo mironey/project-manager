@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Assignment;
 use App\Models\Comment;
 use App\Models\Project;
 use App\Models\Task;
@@ -25,7 +26,7 @@ class DatabaseSeeder extends Seeder
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
         // Create Permissions
-        $permissions= ['manage projects', 'delete projects', 'publish projects', 'unpublish projects', 'manage tasks', 'delete tasks', 'publish tasks', 'unpublish tasks'];
+        $permissions= ['manage projects', 'delete projects', 'publish projects', 'unpublish projects', 'manage tasks', 'delete tasks', 'publish tasks', 'unpublish tasks', 'manage assignments', 'delete assignments', 'publish assignments', 'unpublish assignments'];
         foreach($permissions as $permission) {
             Permission::create([
                 'name' => $permission
@@ -81,24 +82,52 @@ class DatabaseSeeder extends Seeder
         ]);
         $user->assignRole($role3);
 
-        $role4 = Role::create(['name' => 'member']);
-        $role4->givePermissionTo('publish tasks');
-        $role4->givePermissionTo('unpublish tasks');
+        $role4 = Role::create(['name' => 'supervisor']);
+        $role4->givePermissionTo('manage assignments');
+        $role4->givePermissionTo('delete assignments');
+        $role4->givePermissionTo('publish assignments');
+        $role4->givePermissionTo('unpublish assignments');
+
+        $user = User::factory()->create([
+            'name' => 'Supervisor One',
+            'email' => 'supervisor@project.com',
+            'password' => bcrypt('12345678')
+        ]);
+        $user->assignRole($role4);
+
+        $user = User::factory()->create([
+            'name' => 'Supervisor Two',
+            'email' => 'supervisor2@project.com',
+            'password' => bcrypt('12345678')
+        ]);
+        $user->assignRole($role4);
+
+        $user = User::factory()->create([
+            'name' => 'Supervisor Three',
+            'email' => 'supervisor3@project.com',
+            'password' => bcrypt('12345678')
+        ]);
+        $user->assignRole($role4);
+
+        $role5 = Role::create(['name' => 'member']);
+        $role5->givePermissionTo('publish assignments');
+        $role5->givePermissionTo('unpublish assignments');
 
         $user = User::factory()->create([
             'name' => 'Member User',
             'email' => 'member@project.com',
             'password' => bcrypt('12345678')
         ]);
-        $user->assignRole($role4);
+        $user->assignRole($role5);
 
-        User::factory(5)->afterCreating(function (User $user) use ($role4) {
-            $user->assignRole($role4);
+        User::factory(12)->afterCreating(function (User $user) use ($role5) {
+            $user->assignRole($role5);
         })->create();
 
-        Project::factory(5)->create();
-        Task::factory(15)->create();
-        Comment::factory(30)->create();
+        Project::factory(7)->create();
+        Task::factory(21)->create();
+        Assignment::factory(63)->create();
+        Comment::factory(190)->create();
 
         // \App\Models\User::factory(10)->create();
 

@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Task;
 
 use App\Models\Task;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class TaskEdit extends Component
@@ -40,7 +41,7 @@ class TaskEdit extends Component
 
     public function render()
     {
-        return view('livewire.task-edit');
+        return view('livewire.task.task-edit');
     }
 
     public function updateTask()
@@ -54,6 +55,10 @@ class TaskEdit extends Component
         $this->task->user_id = $this->assigned_user;
         $this->task->save();
         session()->flash('message', 'Task updated successfully.');
-        return redirect()->route('task.show', ['projectId' => $this->projectId, 'taskId' => $this->taskId]);
+        if(Auth::user()->hasRole('admin')) {
+            return redirect()->route('admin.task.show', ['projectId' => $this->projectId, 'taskId' => $this->taskId]);
+        } elseif (Auth::user()->hasRole('manager')) {
+            return redirect()->route('manager.task.show', ['projectId' => $this->projectId, 'taskId' => $this->taskId]);
+        }
     }
 }

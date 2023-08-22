@@ -34,7 +34,9 @@ class LoginController extends Controller
             return '/admin/dashboard';
         } elseif (Auth::user()->hasrole('manager') && Auth::user()->can('manage tasks')) {
             return '/manager/dashboard';
-        } elseif (Auth::user()->hasrole('member') && Auth::user()->can('publish tasks')) {
+        } elseif (Auth::user()->hasrole('supervisor') && Auth::user()->can('manage assignments')) {
+            return '/supervisor/dashboard';
+        } elseif (Auth::user()->hasrole('member') && Auth::user()->can('publish assignments')) {
             return '/member/dashboard';
         }
     }

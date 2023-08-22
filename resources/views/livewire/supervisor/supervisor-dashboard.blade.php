@@ -8,16 +8,16 @@
                 <h3>Welcome to {{Auth::user()->name}}</h3>
                 <div class="card">
                     <div class="card-header">
-                        <div>{{ __('All Assignments') }}</div>
+                        <div>{{ __('All Task') }}</div>
                     </div>
                     <div class="card-body">
-                        @foreach($assignments as $assignment)
+                        @foreach($tasks as $task)
                         <table class="table table-success table-striped">
                             <thead class="table-light">
-                                <tr><th colspan="5" class="text-center">Task Name: {{$assignment->task->name}}</th></tr>
+                                <tr><th colspan="5" class="text-center">Project Name: {{$task->project->name}}</th></tr>
                                 <tr class="table-active">
                                     <th>#</th>
-                                    <th>Assignment Name</th>
+                                    <th>Task Name</th>
                                     <th>Description</th>
                                     <th>Due Date</th>
                                     <th>Action</th>
@@ -26,11 +26,11 @@
                             <tbody>
                                 <tr>
                                     <th>{{$loop->iteration}}</th>
-                                    <td>{{$assignment->name}}</td>
-                                    <td>{{$assignment->description}}</td>
-                                    <td>{{$assignment->due_date}}</td>
+                                    <td>{{$task->name}}</td>
+                                    <td>{{$task->description}}</td>
+                                    <td>{{$task->due_date}}</td>
                                     <th>
-                                    <a href="{{route('member.assignment.show', ['projectId' => $assignment->task->project_id , 'taskId' => $assignment->task_id, 'assignmentId' => $assignment->id])}}" 
+                                    <a href="{{route('supervisor.task.show', ['projectId' => $task->project_id, 'taskId' => $task->id])}}" 
                                         class="mx-2">View</a>  
                                     </th>
                                 </tr>

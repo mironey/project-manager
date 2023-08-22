@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Project;
 
 use App\Models\Project;
 use App\Models\User;
@@ -42,7 +42,7 @@ class ProjectEdit extends Component
 
     public function render()
     {
-        return view('livewire.project-edit');
+        return view('livewire.project.project-edit');
     }
 
     public function updateProject()
@@ -56,6 +56,6 @@ class ProjectEdit extends Component
         $this->project->user_id = $this->assigned_user;
         $this->project->save();
         session()->flash('message', 'Project updated successfully.');
-        return redirect()->route('project.show', $this->projectId);
+        return redirect()->route('admin.project.show', $this->projectId);
     }
 }

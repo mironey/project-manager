@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Project;
 
 use App\Models\Project;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class ProjectCreate extends Component
@@ -33,7 +32,7 @@ class ProjectCreate extends Component
 
     public function render()
     {
-        return view('livewire.project-create');
+        return view('livewire.project.project-create');
     }
 
     public function createProject()

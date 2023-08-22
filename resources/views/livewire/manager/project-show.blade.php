@@ -25,7 +25,7 @@
                                     <td>{{$project->start_date}}</td>
                                     <td>{{$project->end_date}}</td>
                                     <td>{{activityStatus($project->status)}}</td>
-                                    <th><a href="{{route('project.edit', $project->id)}}">Edit</a>
+                                    <td>Start Now</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -39,7 +39,7 @@
                             <p>This package allows for users to be associated with permissions and roles.</p>
                         </div>
                         <div>
-                            <a class="btn btn-primary" href="{{route('task.create', $project->id)}}">{{ __('Add Task') }}</a>
+                            <a class="btn btn-primary" href="{{route('manager.task.create', $project->id)}}">{{ __('Add Task') }}</a>
                         </div>
                     </div>
                     <div class="card-body">
@@ -55,9 +55,9 @@
                                         <p><strong>Assigned to:</strong> {{$task->user->name}}</p>
                                     </div>
                                     <div class="d-inline-flex">
-                                        <a href="{{route('task.show', ['projectId' => $task->project_id, 'taskId' => $task->id])}}" 
+                                        <a href="{{route('manager.task.show', ['projectId' => $task->project_id, 'taskId' => $task->id])}}" 
                                         class="mx-2">View</a>
-                                        <a href="{{route('task.edit', ['projectId' => $task->project_id, 'taskId' => $task->id])}}" class="mx-2">Edit</a>
+                                        <a href="{{route('manager.task.edit', ['projectId' => $task->project_id, 'taskId' => $task->id])}}" class="mx-2">Edit</a>
                                         <a href="" class="mx-2">Delete</a>
                                     </div>
                                 </div>

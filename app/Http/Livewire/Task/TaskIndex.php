@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Task;
 
 use Livewire\Component;
 
@@ -8,6 +8,6 @@ class TaskIndex extends Component
 {
     public function render()
     {
-        return view('livewire.task-index');
+        return view('livewire.task.task-index');
     }
 }

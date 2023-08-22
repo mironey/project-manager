@@ -35,8 +35,8 @@
                                     <td>{{activityStatus($project->status)}}</td>
                                     <td><a href="">{{$project->user->name}}</a></td>
                                     <th>
-                                        @include('partials.view', ['route' => 'project.show','id' => $project->id])  
-                                        @include('partials.edit', ['route' => 'project.edit','id' => $project->id]) 
+                                        @include('partials.view', ['route' => 'admin.project.show','id' => $project->id])  
+                                        @include('partials.edit', ['route' => 'admin.project.edit','id' => $project->id]) 
                                         @include('partials.destroy', ['id' => $project->id]) 
                                     </th>
                                 </tr>

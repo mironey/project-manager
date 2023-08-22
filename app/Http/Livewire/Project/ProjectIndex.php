@@ -1,21 +1,20 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Project;
 
 use App\Models\Project;
-use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class ProjectIndex extends Component
 {
-    
+
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
     public function render()
     {
-        return view('livewire.project-index', [
+        return view('livewire.project.project-index', [
             'projects' => Project::with('user')->orderBy('created_at', 'desc')->paginate(10)
         ]);
     }
