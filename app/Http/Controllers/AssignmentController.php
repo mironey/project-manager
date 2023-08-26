@@ -37,4 +37,13 @@ class AssignmentController extends Controller
             'wire' => 'assignment-edit'
         ]);
     }
+
+    public function submit($projectId, $taskId, $assignmentId) {
+        return view('dashboard', [
+            'projectId' => $projectId,
+            'taskId' => $taskId,
+            'assignmentId' => $assignmentId,
+            'wire' => 'assignment-submit'
+        ]);
+    }
 }

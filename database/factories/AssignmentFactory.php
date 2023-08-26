@@ -26,7 +26,9 @@ class AssignmentFactory extends Factory
             'due_date' => Carbon::now()->addDays(1),
             'priority' => rand(1, 3),
             'status' => rand(1, 3),
-            'user_id' => User::role('member')->pluck('id')->random()
+            'user_id' => User::role('member')->pluck('id')->random(),
+            'member_comment' => fake()->text(200),
+            'complete_assignment' => fake()->imageUrl
         ];
     }
 }

@@ -20,6 +20,8 @@ return new class extends Migration
             $table->unsignedBigInteger('priority');
             $table->unsignedBigInteger('status')->comment('1=Not started|2=In progress|3=Completed');
             $table->foreignId('user_id')->nullable()->constrained()->onUpdate('set null')->onDelete('set null');
+            $table->text('member_comment')->nullable();
+            $table->string('complete_assignment')->nullable();
             $table->timestamps();
         });
     }

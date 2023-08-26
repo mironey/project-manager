@@ -64,4 +64,6 @@ Route::group(['middleware' => ['role_or_permission:supervisor|manage assignments
 Route::group(['middleware' => ['role_or_permission:member|publish assignments'], 'prefix' => 'member'], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('member.dashboard');
     Route::get('/{projectId}/task/{taskId}/assignment/{assignmentId}', [AssignmentController::class, 'show'])->name('member.assignment.show');
+    Route::get('/{projectId}/task/{taskId}/assignment/submit/{assignmentId}', [AssignmentController::class, 'submit'])->name('member.assignment.submit');
+
 });

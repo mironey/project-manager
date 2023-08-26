@@ -126,6 +126,10 @@
             <livewire:assignment.assignment-show :projectId='$projectId' :taskId='$taskId' :assignmentId='$assignmentId' /> 
             @break
 
+        @case('assignment-submit')
+            <livewire:assignment.assignment-submit :projectId='$projectId' :taskId='$taskId' :assignmentId='$assignmentId' /> 
+            @break
+
         @default
         <livewire:member.member-dashboard /> 
     @endswitch
