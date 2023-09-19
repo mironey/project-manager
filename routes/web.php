@@ -25,14 +25,16 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::group(['middleware' => ['role_or_permission:super-admin|admin|manage projects'], 'prefix' => 'admin'], function () {
+Route::group(['middleware' => ['auth', 'role_or_permission:super-admin|admin|manage projects'], 'prefix' => 'admin'], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
    
     Route::get('/project', [ProjectController::class, 'index'])->name('project.index');
     Route::get('/project/create', [ProjectController::class, 'create'])->name('project.create');
     Route::get('/project/{id}', [ProjectController::class, 'show'])->name('admin.project.show');
     Route::get('/project/edit/{id}', [ProjectController::class, 'edit'])->name('admin.project.edit');
+    Route::get('/project/delivery/{id}', [ProjectController::class, 'delivery'])->name('admin.project.delivery');
 
+    Route::get('/{id}/task', [TaskController::class, 'index'])->name('admin.task.index');
     Route::get('/{id}/task/create', [TaskController::class, 'create'])->name('admin.task.create');
     Route::get('/{projectId}/task/{taskId}', [TaskController::class, 'show'])->name('admin.task.show');
     Route::get('/{projectId}/task/edit/{taskId}', [TaskController::class, 'edit'])->name('admin.task.edit');
@@ -40,10 +42,11 @@ Route::group(['middleware' => ['role_or_permission:super-admin|admin|manage proj
     Route::get('/{projectId}/task/{taskId}/assignment/create', [AssignmentController::class, 'create'])->name('admin.assignment.create');
 });
 
-Route::group(['middleware' => ['role_or_permission:manager|manage tasks'], 'prefix' => 'manager'], function () {
+Route::group(['middleware' => ['auth', 'role_or_permission:manager|manage tasks'], 'prefix' => 'manager'], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('manager.dashboard');
     
-    Route::get('/project/{id}', [ProjectController::class, 'show'])->name('project.show');
+    Route::get('/project/{id}', [ProjectController::class, 'show'])->name('manager.project.show');
+    Route::get('/project/submit/{id}', [ProjectController::class, 'submit'])->name('manager.project.submit');
 
     Route::get('/{id}/task/create', [TaskController::class, 'create'])->name('manager.task.create');
     Route::get('/{projectId}/task/{taskId}', [TaskController::class, 'show'])->name('manager.task.show');
@@ -52,16 +55,17 @@ Route::group(['middleware' => ['role_or_permission:manager|manage tasks'], 'pref
     Route::get('/{projectId}/task/{taskId}/assignment/create', [AssignmentController::class, 'create'])->name('manager.assignment.create');
 });
 
-Route::group(['middleware' => ['role_or_permission:supervisor|manage assignments'], 'prefix' => 'supervisor'], function () {
+Route::group(['middleware' => ['auth', 'role_or_permission:supervisor|manage assignments'], 'prefix' => 'supervisor'], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('supervisor.dashboard');
     Route::get('/{projectId}/task/{taskId}', [TaskController::class, 'show'])->name('supervisor.task.show');
+    Route::get('/{projectId}/task/submit/{taskId}', [TaskController::class, 'submit'])->name('supervisor.task.submit');
 
     Route::get('/{projectId}/task/{taskId}/assignment/create', [AssignmentController::class, 'create'])->name('supervisor.assignment.create');
     Route::get('/{projectId}/task/{taskId}/assignment/{assignmentId}', [AssignmentController::class, 'show'])->name('supervisor.assignment.show');
     Route::get('/{projectId}/task/{taskId}/assignment/edit/{assignmentId}', [AssignmentController::class, 'edit'])->name('supervisor.assignment.edit');
 });
 
-Route::group(['middleware' => ['role_or_permission:member|publish assignments'], 'prefix' => 'member'], function () {
+Route::group(['middleware' => ['auth', 'role_or_permission:member|publish assignments'], 'prefix' => 'member'], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('member.dashboard');
     Route::get('/{projectId}/task/{taskId}/assignment/{assignmentId}', [AssignmentController::class, 'show'])->name('member.assignment.show');
     Route::get('/{projectId}/task/{taskId}/assignment/submit/{assignmentId}', [AssignmentController::class, 'submit'])->name('member.assignment.submit');

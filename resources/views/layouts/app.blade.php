@@ -43,6 +43,11 @@
                             Dashboard
                             </a>
                         @endhasrole
+                        @hasrole('member')
+                            <a href="{{route('member.dashboard')}}" class="nav-link active" aria-current="page">
+                            Dashboard
+                            </a>
+                        @endhasrole
                         </li>
                         <li>
                             <a href="{{route('project.index')}}" class="nav-link link-light">

@@ -27,7 +27,7 @@ class TaskCreate extends Component
 
     public function mount()
     {
-        $this->users = User::role('member')->get();
+        $this->users = User::role('supervisor')->get();
     }
 
     public function render()

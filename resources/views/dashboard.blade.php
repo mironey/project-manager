@@ -26,8 +26,12 @@
             <livewire:project.project-edit :projectId='$id' /> 
             @break
 
+        @case('project-delivery')
+            <livewire:project.project-delivery :projectId='$id' /> 
+            @break
+
         @case('task-index')
-            <livewire:task-index /> 
+            <livewire:task.task-index :projectId='$projectId' />
             @break
 
         @case('task-show')
@@ -60,6 +64,10 @@
 
         @case('project-show')
             <livewire:project.project-show :projectId='$id' /> 
+            @break
+
+        @case('project-submit')
+            <livewire:project.project-submit :projectId='$id' /> 
             @break
 
         @case('task-index')
@@ -96,6 +104,10 @@
 
         @case('task-show')
             <livewire:task.task-show :projectId='$projectId' :taskId='$taskId' /> 
+            @break
+
+        @case('task-submit')
+            <livewire:task.task-submit :projectId='$projectId' :taskId='$taskId' /> 
             @break
 
         @case('assignment-show')

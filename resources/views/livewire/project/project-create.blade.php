@@ -25,7 +25,7 @@
                                 </div>
                                 <div class="m-2 flex-fill">
                                     <label for="end_date" class="form-label">End Date</label>
-                                    <input type="text" class="form-control" id="end_date" wire:model="end_date">
+                                    <input type="text" class="form-control" id="end_date" wire:model="end_date" @if(empty($start_date)) disabled @endif>
                                     @error('end_date') <span class="error text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>

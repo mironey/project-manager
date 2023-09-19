@@ -15,7 +15,7 @@ class ProjectCreate extends Component
     public $end_date;
     public $status;
     public $assigned_user;
-
+    
     protected $rules = [
         'name' => 'required|string',
         'description' => 'required|string|max:255',

@@ -19,16 +19,22 @@ class AssignmentFactory extends Factory
      */
     public function definition(): array
     {
+        $deliveredFiles = [
+            fake()->imageUrl(),
+            fake()->imageUrl(),
+        ];
+
         return [
             'task_id' => Task::all()->random()->id,
             'name' => fake()->unique()->sentence(3),
             'description' => fake()->text(),
             'due_date' => Carbon::now()->addDays(1),
             'priority' => rand(1, 3),
-            'status' => rand(1, 3),
+            'status' => rand(1, 4),
             'user_id' => User::role('member')->pluck('id')->random(),
+            'helping_kits' => serialize($deliveredFiles),
             'member_comment' => fake()->text(200),
-            'complete_assignment' => fake()->imageUrl
+            'delivered_files' => serialize($deliveredFiles)
         ];
     }
 }

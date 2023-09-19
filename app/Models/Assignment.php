@@ -16,7 +16,8 @@ class Assignment extends Model
         'due_date',
         'priority',
         'status',
-        'user_id'
+        'user_id',
+        'helping_kits'
     ];
 
     public function user() {

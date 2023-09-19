@@ -31,4 +31,18 @@ class ProjectController extends Controller
             'wire' => 'project-edit'
         ]);
     }
+
+    public function submit($id) {
+        return view('dashboard', [
+            'id' => $id,
+            'wire' => 'project-submit'
+        ]);
+    }
+
+    public function delivery($id) {
+        return view('dashboard', [
+            'id' => $id,
+            'wire' => 'project-delivery'
+        ]);
+    }
 }

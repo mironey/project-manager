@@ -11,7 +11,9 @@ class SupervisorDashboard extends Component
     public function render()
     {
         return view('livewire.supervisor.supervisor-dashboard', [
-            'tasks' => Task::where('user_id' , Auth::user()->id)->with('project')->get()
-        ]);   
+            'tasks' => Task::with('project')->where('user_id' , Auth::user()->id)->get()->groupBy(function($task){
+                return $task->project->name;
+            })
+        ]);
     }
 }

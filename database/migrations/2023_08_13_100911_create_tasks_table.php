@@ -18,8 +18,11 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->date('due_date');
             $table->unsignedBigInteger('priority');
-            $table->unsignedBigInteger('status')->comment('1=Not started|2=In progress|3=Completed');
+            $table->unsignedBigInteger('status')->comment('1=Not started|2=In progress|3=Modification|4=Completed');
             $table->foreignId('user_id')->nullable()->constrained()->onUpdate('set null')->onDelete('set null');
+            $table->string('helping_kits')->nullable();
+            $table->text('related_comment')->nullable();
+            $table->string('delivered_files')->nullable();
             $table->timestamps();
         });
     }

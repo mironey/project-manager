@@ -23,6 +23,11 @@
                                     <input type="text" class="form-control" id="due_date" wire:model="due_date">
                                     @error('due_date') <span class="error text-danger">{{ $message }}</span> @enderror
                                 </div>
+                                <div class="m-2 flex-fill">
+                                    <label for="formFileMultiple" class="form-label">File</label>
+                                    <input wire:model="attachedKits" class="form-control" type="file" id="formFileMultiple" multiple>
+                                    @error('attachedKits') <span class="error text-danger">{{ $message }}</span> @enderror
+                                </div>
                             </div>
                             <div class="d-flex flex-row">
                                 <div class="m-2 flex-fill">

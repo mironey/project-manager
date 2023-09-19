@@ -30,7 +30,7 @@ class TaskEdit extends Component
     public function mount()
     {
         $this->task = Task::with('user')->where('project_id', $this->projectId)->where('id', $this->taskId)->first();
-        $this->users = User::role('member')->get();
+        $this->users = User::role('supervisor')->get();
 
         $this->name = $this->task->name;
         $this->description = $this->task->description;

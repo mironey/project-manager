@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    public function index() {
+    public function index($projectId) {
         return view('dashboard', [
+            'projectId' => $projectId,
             'wire' => 'task-index'
         ]);
     }
@@ -32,6 +33,14 @@ class TaskController extends Controller
             'projectId' => $projectId,
             'taskId' => $taskId,
             'wire' => 'task-edit'
+        ]);
+    }
+
+    public function submit($projectId, $taskId) {
+        return view('dashboard', [
+            'projectId' => $projectId,
+            'taskId' => $taskId,
+            'wire' => 'task-submit'
         ]);
     }
     

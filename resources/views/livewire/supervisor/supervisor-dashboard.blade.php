@@ -10,11 +10,14 @@
                     <div class="card-header">
                         <div>{{ __('All Task') }}</div>
                     </div>
+                    @foreach($tasks as $project_name => $project_tasks)
                     <div class="card-body">
-                        @foreach($tasks as $task)
+                        <div class="card-header text-center text-bg-dark">
+                            <p class="fw-bold m-0">Project Name: {{$project_name}}</p>
+                        </div>
+                        @foreach($project_tasks as $task)
                         <table class="table table-success table-striped">
                             <thead class="table-light">
-                                <tr><th colspan="5" class="text-center">Project Name: {{$task->project->name}}</th></tr>
                                 <tr class="table-active">
                                     <th>#</th>
                                     <th>Task Name</th>
@@ -38,6 +41,7 @@
                         </table>  
                         @endforeach
                     </div>
+                    @endforeach
                 </div>
             </div>
         </div>

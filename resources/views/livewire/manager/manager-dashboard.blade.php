@@ -33,7 +33,7 @@
                                     <td>{{$project->end_date}}</td>
                                     <td>{{activityStatus($project->status)}}</td>
                                     <th>
-                                        @include('partials.view', ['route' => 'project.show','id' => $project->id])  
+                                        @include('partials.view', ['route' => 'manager.project.show','id' => $project->id])  
                                     </th>
                                 </tr>
                                 @endforeach

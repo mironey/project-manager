@@ -19,14 +19,22 @@ class TaskFactory extends Factory
      */
     public function definition(): array
     {
+        $deliveredFiles = [
+            fake()->imageUrl(),
+            fake()->imageUrl(),
+        ];
+
         return [
             'project_id' => Project::all()->random()->id,
             'name' => fake()->unique()->sentence(3),
             'description' => fake()->text(),
             'due_date' => Carbon::now()->addDays(3),
             'priority' => rand(1, 3),
-            'status' => rand(1, 3),
-            'user_id' => User::role('supervisor')->pluck('id')->random()
+            'status' => rand(1, 4),
+            'user_id' => User::role('supervisor')->pluck('id')->random(),
+            'helping_kits' => serialize($deliveredFiles),
+            'related_comment' => fake()->text(200),
+            'delivered_files' => serialize($deliveredFiles)
         ];
     }
 }

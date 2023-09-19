@@ -20,13 +20,21 @@ class ProjectFactory extends Factory
     {
         $start_date = now();
         $end_date = Carbon::parse($start_date)->addDays(5);
+        $deliveredFiles = [
+            fake()->imageUrl(),
+            fake()->imageUrl(),
+        ];
+
         return [
             'name' => fake()->unique()->sentence(3),
             'description' => fake()->text(),
             'start_date' => $start_date,
             'end_date' => $end_date,
-            'status' => rand(1, 3),
-            'user_id' => User::role('manager')->pluck('id')->random()
+            'status' => rand(1, 4),
+            'user_id' => User::role('manager')->pluck('id')->random(),
+            'helping_kits' => serialize($deliveredFiles),
+            'related_comment' => fake()->text(200),
+            'delivered_files' => serialize($deliveredFiles)
         ];
     }
 }

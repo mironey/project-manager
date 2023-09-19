@@ -12,7 +12,7 @@ class MemberDashboard extends Component
     public function render()
     {
         return view('livewire.member.member-dashboard', [
-            'assignments' => Assignment::with('task')->where('user_id' , Auth::user()->id)->get()
-        ]);   
+            'assignments' => Assignment::with(['task.project'])->where('user_id', Auth::user()->id)->get()->groupBy(['task.project.name', 'task.name'])
+        ]);  
     }
 }

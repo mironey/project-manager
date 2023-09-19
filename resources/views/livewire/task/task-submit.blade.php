@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <form wire:submit.prevent="submitAssignment" autocomplete="off">
+                <form wire:submit.prevent="submitTask" autocomplete="off">
                     <div class="card">
                         <div class="card-body">
                             <div class="mb-3">
@@ -15,7 +15,7 @@
                                 <input wire:model="attachedFiles" class="form-control" type="file" id="formFileMultiple" multiple>
                                 @error('attachedFiles') <span class="error text-danger">{{ $message }}</span> @enderror
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit assignment</button>
+                            <button type="submit" class="btn btn-primary">Submit task</button>
                         </div>
                     </div>
                 </form>
